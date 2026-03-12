@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Computação Gráfica - Primeiro Projeto?</title>
+    <style>
+        body {
+            background-color: #d3d3d3; /* fundo cinza */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        #Canvas {
+            background-color: white;
+            border: 2px solid #000; /* borda que define os limites */
+        }
+    </style>
+</head>
+
+<body>
+
+    <canvas id="Canvas" width="800" height="800"></canvas>
+
+    <script>
+        const canvas = document.getElementById('Canvas');
+        const contexto = canvas.getContext('2d');
+
+        let x = 50; /* posição inicial do quadrado */
+        let y = 50;
+
+        let permitidoDesenhar = true
+
+        const tamanho = 8; /* tamanho do quadrado */
+
+        contexto.fillStyle = "black"; /* cor do quadrado */
+
+        contexto.fillRect(x, y, tamanho, tamanho);
+
+        document.addEventListener('keydown', function (evento) {
+
+            if (permitidoDesenhar === false) {
+                return;
+            }
+
+            const tecla = evento.key.toLowerCase(); /* evitar bug se o capslock tiver ativado */
+
+            const deslocamento = 4; /* ajustavel, mas lembrar de colocar no maximo 8 que é o tamanho do quadrado */
+
+            /* movimentação do quadrado com 4 novas teclas para diagonais */
+
+            if (tecla === 'w' || tecla === '8') {
+                y = y - deslocamento;
+            }
+            else if (tecla === 'x' || tecla === '2') {
+                y = y + deslocamento;
+            }
+            else if (tecla === 'a' || tecla === '4') {
+                x = x - deslocamento;
+            }
+            else if (tecla === 'd' || tecla === '6') {
+                x = x + deslocamento;
+            }
+            else if (tecla === 'q' || tecla === '7') {
+                x = x - deslocamento;
+                y = y - deslocamento;
+            }
+            else if (tecla === 'e' || tecla === '9') {
+                x = x + deslocamento;
+                y = y - deslocamento;
+            }
+            else if (tecla === 'z' || tecla === '1') {
+                x = x - deslocamento;
+                y = y + deslocamento;
+            }
+            else if (tecla === 'c' || tecla === '3') {
+                x = x + deslocamento;
+                y = y + deslocamento;
+            }
+            else if (tecla === 's' || tecla === '5') {
+                contexto.fillStyle = "white";
+                contexto.fillRect(0, 0, canvas.width, canvas.height);
+                contexto.fillStyle = "black";
+            }
+            else if (tecla === 'escape') {
+                contexto.fillStyle = "white";
+                contexto.fillRect(0, 0, canvas.width, canvas.height);
+                contexto.fillStyle = "black";
+                contexto.font = "20px Arial";
+                contexto.fillText("Fim do programa", 300, 400);
+
+                alert("Fim do programa");
+                permitidoDesenhar = false;
+                return;
+            }
+
+            /* limitador do quadrado dentro do canvas */
+
+            if (x < 0) {
+                x = 0;
+            }
+            else if (x > canvas.width - tamanho) {
+                x = canvas.width - tamanho;
+            }
+
+            if (y < 0) {
+                y = 0;
+            }
+            else if (y > canvas.height - tamanho) {
+                y = canvas.height - tamanho;
+            }
+
+            contexto.fillRect(x, y, tamanho, tamanho);
+        });
+
+    </script>
+
+</body>
+
+</html>
