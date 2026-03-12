@@ -1,4 +1,4 @@
-# Computação Gráfica - UFG 🎨💻
+# Computação Gráfica - UFG
 
 Este repositório é dedicado a armazenar todos os códigos, exercícios e projetos desenvolvidos ao longo da disciplina de **Computação Gráfica**, do curso de Ciência da Computação na Universidade Federal de Goiás (UFG).
 
